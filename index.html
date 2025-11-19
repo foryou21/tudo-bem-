@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>roi</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: #f2f2f2;
+        /* Cor neutra */
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #container {
+        width: 90%;
+        max-width: 500px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(15px);
+        color: #333;
+        /* Cor do texto mais escura para contraste */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h2 {
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px;
+        margin-top: 12px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        background: rgba(255, 255, 255, 0.3);
+        color: #333;
+      }
+
+      input::placeholder {
+        color: #666;
+      }
+
+      input:focus {
+        background: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 10px rgba(0, 128, 128, 0.3);
+      }
+
+      button {
+        width: 100%;
+        padding: 14px;
+        margin-top: 15px;
+        background: linear-gradient(90deg, #00c853, #009624);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 17px;
+        cursor: pointer;
+        transition: 0.4s;
+        box-shadow: 0 0 10px rgba(0, 128, 0, 0.3);
+      }
+
+      button:hover {
+        background: linear-gradient(90deg, #009624, #00c853);
+        box-shadow: 0 0 20px rgba(0, 128, 0, 0.5);
+      }
+
+      #erro {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 14px;
+        color: #ff5252;
+      }
+
+      .texto {
+        margin: 20px 0;
+        line-height: 1.6;
+        font-size: 17px;
+        text-align: center;
+      }
+
+      #final {
+        width: 100%;
+        margin-top: 30px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (max-width: 600px) {
+        #container {
+          padding: 20px;
+        }
+
+        input,
+        button {
+          font-size: 16px;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <!-- Tela de senha -->
+      <div id="login">
+        <h2>Digite a senha (atrás do cartão)</h2>
+        <input type="password" id="senha" placeholder="Senha" />
+        <button onclick="entrar()">Entrar</button>
+        <p id="erro" style="display: none">Senha incorreta!</p>
+      </div>
+
+      <!-- Conteúdo será adicionado dinamicamente -->
+      <div id="conteudo"></div>
+    </div>
+
+    <script>
+      function entrar() {
+        const senha = document.getElementById("senha").value;
+        if (senha === "oii") {
+          document.getElementById("login").style.display = "none";
+
+          // Criando conteúdo somente após a senha correta
+          const conteudoDiv = document.getElementById("conteudo");
+          conteudoDiv.innerHTML = `
+            <h2>olá!</h2>
+            <div class="texto">
+                <p>tudo bem? estou fazendo isso como forma de dizer feliz niver, espero que tenha gostado do presente que te mandei, foi mal n fazer pessoalmente, mas n sei se vc vai falar cmg agr, porém ainda sim eu quis te mandar isso, ja tinha planejado isso a bastante tempo então tô aqui te mandando esse presente junto do site, não sabia se deveria mandar msg pra vc e se vc iria querer isso, no final vai ter um link pro meu zapzap, se vc ver isso e quiser deixar pelo menos um aviso q vc viu tudo isso e recebeu meu presente minha pessoa fica agredicido, mas se nao quiser responder tudo bem, vou entender que ce nao quer falar cmg ainda e n irei insistir, mas eu so queria q ce soubesse que sinto sua falta.</p>
+            
+            
+                <p>bom,é isso, ce sabe que nao sou bom com texto kskskk, mas desejo tudo de bom e sucesso pra vc, que ce consiga alcançar a nota do enem ( de psicologia caso ce ainda esteja com ele em mente), espero que ce tenha conseguido resolver seus problemas naquela epoca que ce tava tentando resolver antes de nos despedir, não quero puxar muito do seu tempo, e desculpa por td, até.</p>
+            </div>
+            <div id="final">
+                <input type="text" id="mensagem" placeholder="Digite sua mensagem...">
+                <button onclick="enviarWhats()">Enviar para WhatsApp</button>
+            </div>
+        `;
+        } else {
+          document.getElementById("erro").style.display = "block";
+        }
+      }
+
+      function enviarWhats() {
+        const texto = encodeURIComponent(
+          document.getElementById("mensagem").value
+        );
+        const numero = "5583998508419";
+
+        if (texto.trim() === "") {
+          alert("Digite uma mensagem antes!");
+          return;
+        }
+
+        window.open(`https://wa.me/${numero}?text=${texto}`, "_blank");
+      }
+    </script>
+  </body>
+</html>
